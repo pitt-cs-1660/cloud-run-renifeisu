@@ -120,7 +120,16 @@ async function vote(team) {
       /*
        * ++++ YOUR CODE HERE ++++
        */
-      window.alert(`Not implemented yet!`);
+      const response = await fetch('https://tabs-vs-spaces-299594958094.us-central1.run.app', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`  
+        },
+        body: new URLSearchParams({team: team})
+      });
+      
+      window.alert(`You have voted for ${team}!`);
 
     } catch (err) {
       console.log(`Error when submitting vote: ${err}`);
@@ -130,3 +139,15 @@ async function vote(team) {
     window.alert('User not signed in.');
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("signInButton").addEventListener("click", function () {
+    toggle();
+  });
+  document.getElementById("voteTabs").addEventListener("click", function () {
+    vote("TABS");
+  });
+  document.getElementById("voteSpaces").addEventListener("click", function () {
+    vote("SPACES");
+  });
+});
