@@ -120,7 +120,7 @@ async function vote(team) {
       /*
        * ++++ YOUR CODE HERE ++++
        */
-      const response = await fetch('https://tabs-vs-spaces-299594958094.us-central1.run.app', {
+      const response = await fetch('/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
