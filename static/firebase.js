@@ -129,7 +129,9 @@ async function vote(team) {
         body: new URLSearchParams({team: team})
       });
       if(response.ok) {
+        updateVoteCounts();
         window.alert(`You have voted for ${team}!`);
+        window.location.reload();
       }
       else {
         window.alert(`There was an issue with voting.`)
@@ -142,6 +144,21 @@ async function vote(team) {
     }
   } else {
     window.alert('User not signed in.');
+  }
+}
+
+async function updateVoteCounts() {
+  try {
+    const response = await fetch('/vote-counts');
+    if (response.ok) {
+      const data = await response.json();
+      document.getElementById('tabs-count').innerText = `${data.tabsVotes} votes`;
+      document.getElementById('spaces-count').innerText = `${data.spacesVotes} votes`;
+    } else {
+      console.log('Failed to get vote counts.');
+    }
+  } catch (err) {
+    console.log('Error getting vote counts:', err);
   }
 }
 
