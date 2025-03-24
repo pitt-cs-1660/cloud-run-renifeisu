@@ -128,8 +128,13 @@ async function vote(team) {
         },
         body: new URLSearchParams({team: team})
       });
+      if(response.ok) {
+        window.alert(`You have voted for ${team}!`);
+      }
+      else {
+        window.alert(`There was an issue with voting.`)
+      }
       
-      window.alert(`You have voted for ${team}!`);
 
     } catch (err) {
       console.log(`Error when submitting vote: ${err}`);
